@@ -1,0 +1,45 @@
+# $XDG_CONFIG_HOME/dotfiles/info/exclude.master
+#
+# Master git exclusions for dotfiles repo.
+
+# Exclude everything by default and all backup files
+/*
+
+# Track configuration directory
+!.config
+
+# Ignore any loose files
+.config/*
+
+# Specific application directories to ignore
+.config/BraveSoftware/
+.config/Code\ -\ OSS/
+.config/VirtualBox/
+.config/aurutils/
+.config/chromium/
+.config/gtk-*/
+.config/pulse/
+.conig/qutebrowser/
+.config/spotify*/
+.config/ssh/
+.config/systemd/
+
+# Ignore specific files in tracked directories
+.config/ncmpcpp/error.log
+
+# Track dotfiles master exclusion file
+!.config/dotfiles/
+.config/dotfiles/*
+!.config/dotfiles/info
+.config/dotfiles/info/*
+!.config/dotfiles/info/exclude.master
+
+# Track gnupg configuration
+!.local
+.local/*
+!.local/share
+.local/share/*
+!.local/share/gnupg
+.local/share/gnupg/*
+!.local/share/gnupg/gpg.conf
+!.local/share/gnupg/gpg-agent.conf

@@ -1,0 +1,22 @@
+# $XDG_CONFIG_HOME/git/git.conf
+#
+# User git configuration.
+
+[user]
+	email = aeryxium+git@gmail.com
+	name  = Aeryxium
+	signingkey = F2E72472
+[commit]
+	gpgsign = true
+[init]
+	defaultBranch = master
+[pull]
+	rebase = false
+[diff]
+	tool = nvimdiff
+[difftool]
+	prompt = false
+[difftool "nvimdiff"]
+	cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
+[alias]
+	d = difftool

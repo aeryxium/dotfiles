@@ -1,0 +1,24 @@
+#!/usr/bin/bash
+
+# $XDG_CONFIG_HOME/X11/xinitrc
+#
+# xinitrc for bspwm with prime offloading using optimus manager.
+
+if [ -d /etc/X11/xinit/xinitrc.d ]; then
+	for f in /etc/X11/xinit/xinitrc.d/*; do
+		[ -x "$f" ] && . "$f"
+	done
+	unset f
+fi
+
+# Run prime-offload if optimus manager is installed
+if [[ -f /usr/bin/prime-offload ]]; then
+	/usr/bin/prime-offload
+fi
+
+bspwm
+
+# Run prime-switch as root if optimus manager is installed
+if [[ -f /usr/bin/prime-switch ]]; then
+	sudo /usr/bin/prime-switch
+fi

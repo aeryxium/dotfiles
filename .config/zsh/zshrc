@@ -1,0 +1,33 @@
+# $ZDOTDIR/zshrc
+#
+# Modular ZSH configuration file.
+
+# Modules
+autoload -Uz add-zsh-hook
+autoload -U up-line-or-beginning-search
+autoload -U down-line-or-beginning-search
+autoload -Uz compinit
+compinit
+
+# Basic Options
+setopt appendhistory autocd notify nomatch numeric_glob_sort
+unsetopt beep
+bindkey -v
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+tput cnorm
+
+# Cache Key Passwords
+export GNUPGHOME="$HOME/.local/share/gnupg"
+unset SSH_AGENT_PID
+export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+export GPG_TTY=$(tty)
+gpg-connect-agent /bye &>/dev/null
+
+# Set Tab
+tabs -4
+
+# Extra Config Files
+for zshconf in $ZDOTDIR/zmodules-enabled/*.zsh; do
+	source $zshconf
+done
