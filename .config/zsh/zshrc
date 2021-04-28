@@ -28,6 +28,7 @@ gpg-connect-agent /bye &>/dev/null
 tabs -4
 
 # Extra Config Files
+[[ ! -d "$ZDOTDIR/zmodules-enabled" ]] && return
 for zshconf in $ZDOTDIR/zmodules-enabled/*.zsh; do
 	source $zshconf
 done
