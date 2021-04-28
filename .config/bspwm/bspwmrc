@@ -17,20 +17,22 @@ bspc rule -a Spotify       desktop=^9
 bspc rule -a Brave-browser desktop=^2
 bspc rule -a kitty --one-shot kitty
 
-# Startup applicaitons
+# Startup basic applicaitons
 xrdb       ~/.config/X11/Xresources
 setxkbmap  -option "ctrl:swapcaps"
 xsetroot   -cursor_name left_ptr
 polybar    -r aeryxium &
-brave      --start-maximized &
 lxpolkit   &
 picom      &
 sxhkd      &
-spotify    &
 mpd-mpris  &
-kitty      &
 playerctld daemon
 feh        --no-fehbg --bg-fill --randomize /usr/share/wallpapers/**
+
+# Startup user applicatoins if they aren't already running
+pgrep kitty   >/dev/null || kitty &
+pgrep spotify >/dev/null || spotify &
+pgrep brave   >/dev/null || brave --start-maximized &
 
 # Set desktop names
 bspc monitor -d ᚠ ᚢ ᚦ ᚩ ᚱ ᚳ ᚷ ᚹ ᚻ
