@@ -22,12 +22,14 @@ super + shift + Escape
 	xrdb ~/.config/X11/Xresources && polybar-msg cmd restart
 # Load new random wallpaper
 super + w
-	feh --no-fehbg --bg-fill --randomize /usr/share/wallpapers/**
+	feh --no-fehbg --bg-fill --randomize /usr/share/wallpapers/favourites/**
 
 # -- Close/Quit
 # Quit bspwm
 super + shift + q
 	bspc quit
+super + ctrl + r
+	bspc quit && sudo reboot
 # Close/kill node
 super + shift + {c,k}
 	bspc node {-c,-k}

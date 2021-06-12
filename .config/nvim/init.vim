@@ -16,9 +16,12 @@ call plug#begin('$XDG_DATA_HOME/nvim/site/plugged')
 	Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 	Plug 'itchyny/lightline.vim'
 	Plug 'junegunn/fzf'
+	Plug 'junegunn/fzf.vim'
 	Plug 'junegunn/vim-easy-align'
 	Plug 'mzlogin/vim-markdown-toc'
-	Plug 'thisisrandy/vim-outdated-plugins'
+	Plug 'preservim/nerdtree'
+	Plug 'semanser/vim-outdated-plugins'
+	Plug 'vimwiki/vimwiki'
 	Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
 call plug#end()
 
@@ -31,9 +34,12 @@ let g:lightline = {
 	\ 'component': {
 	\     'filename': '%F'}
 	\ }
-
 let g:livepreview_previewer = 'zathura'
 let g:livepreview_cursorhold_recompile = 0
+let g:vimwiki_list = [ {'path':'~/notebook/content', 'syntax': 'markdown', 'ext': '.md', 'links_space_char': '-'} ]
+let g:vimwiki_ext2syntax = {'.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
+let g:vimwiki_markdown_link_ext = 0
+let g:markdown_folding = 1
 " -- }}}
 
 " -- Formatting {{{
@@ -55,6 +61,11 @@ set shiftwidth=8
 set tabstop=8
 set softtabstop=8
 set noexpandtab
+
+" Set filetype-dependent tabs and spacing
+autocmd FileType html setlocal shiftwidth=4 tabstop=4 softtabstop=4
+autocmd FileType vimwiki setlocal shiftwidth=4 tabstop=4 softtabstop=4
+autocmd FileType md setlocal shiftwidth=4 tabstop=4 softtabstop=4
 " -- }}}
 
 " -- User Interface {{{
@@ -63,11 +74,14 @@ set cursorline
 set laststatus=2
 set modeline
 set modelines=1
-set nowrap
 set number relativenumber
 set showcmd
 set showmatch
 set splitbelow splitright
+set linebreak
+set spelllang=en_ca,fr
+autocmd FileType markdown setlocal spell
+autocmd FileType gitcommit setlocal spell
 
 " Colors and highlighting
 colorscheme nord
@@ -173,7 +187,7 @@ function OpenDiff()
 	execute 'vs' realfile
 	call ToggleDiff()
 endfunction
-map <leader>d :call OpenDiff()<return>
+map <leader>cd :call OpenDiff()<return>
 
 function NextDiff()
 	wincmd h
@@ -181,7 +195,7 @@ function NextDiff()
 	n
 	call OpenDiff()
 endfunction
-map <leader>n :call NextDiff()<return>
+map <leader>cn :call NextDiff()<return>
 
 " -- }}}
 
