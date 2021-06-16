@@ -36,7 +36,7 @@ let g:lightline = {
 	\ }
 let g:livepreview_previewer = 'zathura'
 let g:livepreview_cursorhold_recompile = 0
-let g:vimwiki_list = [ {'path':'~/notebook/content', 'syntax': 'markdown', 'ext': '.md', 'links_space_char': '-'} ]
+let g:vimwiki_list = [ {'path':'~/notebook/content', 'index':'_index', 'syntax': 'markdown', 'ext': '.md', 'links_space_char': '-'} ]
 let g:vimwiki_ext2syntax = {'.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
 let g:vimwiki_markdown_link_ext = 0
 let g:markdown_folding = 1
@@ -170,6 +170,18 @@ if $TERM =~ '^screen-256color'
 endif
 " -- }}}
 
+" -- Create Note
+function! CreateNote() range
+	let [lnum1, col1] = getpos("'<")[1:2]
+	let [lnum2, col2] = getpos("'>")[1:2]
+	let lines = getline(lnum1, lnum2)
+	let lines[-1] = lines[-1][: col2 - (&selection == 'inclusive' ? 1 : 2)]
+	let lines[0] = lines[0][col1 - 1:]
+	let selectedText = join(lines, "\n")
+	execute "!hnn " . selectedText
+endfunction
+map <leader>sn g_bvi(:call CreateNote()<return><return><tab><return>
+
 " -- diff {{{
 " Toggle diffing all open windows
 function ToggleDiff()
@@ -198,5 +210,7 @@ endfunction
 map <leader>cn :call NextDiff()<return>
 
 " -- }}}
+
+set shellcmdflag=-ic
 
 " vim:foldmethod=marker:foldlevel=0

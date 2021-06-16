@@ -30,6 +30,9 @@ function hnn() {
 		return
 	fi
 	filename="$@"
+	if [[ "$@" =~ / ]]; then
+		filename="${filename##*/}"
+	fi
 	if [[ ! "$@" =~ .md$ ]]; then
 		filename="${filename}.md"
 	fi
@@ -56,7 +59,9 @@ function syncnotebook() {
 }
 
 function vw() {
+	pushd ~/notebook/content
 	nvim -c 'VimwikiIndex' -c 'VimwikiGoto _index'
+	popd
 #	if echo -e "GET http://notebook.aeryxium.com HTTP/1.0\n\n" | nc notebook.aeryxium.com 80 &>/dev/null; then
 #		pushd "$HOME"/notebook && hugo -D --quiet && popd
 #		syncnotebook &!
