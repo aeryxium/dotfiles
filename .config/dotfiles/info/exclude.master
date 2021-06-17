@@ -14,18 +14,25 @@
 # Specific application directories to ignore
 .config/BraveSoftware/
 .config/Code\ -\ OSS/
-.config/VirtualBox/
 .config/aurutils/
 .config/chromium/
 .config/gtk-*/
 .config/pulse/
-.conig/qutebrowser/
 .config/spotify*/
 .config/ssh/
 .config/systemd/
 
 # Ignore specific files in tracked directories
 .config/ncmpcpp/error.log
+.config/nvim/.netrwhist
+.config/nvim/autoload/
+.config/nvim/plugged/
+.config/nvim/templates/
+.config/tmux/plugins/
+.config/tmux/resurrect/
+.config/zsh/.zcompdump
+.config/zsh/histfile
+.config/zsh/zmodules-enabled/
 
 # Track dotfiles master exclusion file
 !.config/dotfiles/
